@@ -9,8 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^1.0.0-beta.13",
+    "@nextui-org/use-ssr": "^0.0.0-dev-v2-20230326012034",
+    "bcryptjs": "^2.4.3",
+    "leaflet": "^1.9.4",
+    "leaflet-defaulticon-compatibility": "^0.1.2",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.0",
     "next": "13.4.10",
+    "next-auth": "^4.22.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-leaflet": "^4.2.1"
   }
 }
