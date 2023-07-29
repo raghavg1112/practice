@@ -11,6 +11,7 @@
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.13",
     "@nextui-org/use-ssr": "^0.0.0-dev-v2-20230326012034",
+    "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",

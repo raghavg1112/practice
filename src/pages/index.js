@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { useSession } from "next-auth/react";
 import App from "@/components/Navbar";
-import Map from "@/components/Map/Map.jsx";
+// import Map from "@/components/Map/Map";
+import MapWithNoSSR from "@/components/Map";
+
 export default function Home() {
   return (
     <>
@@ -12,8 +14,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <h1>
+          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        </h1>
         {/* <App style={{ scrollbars: "none" }} /> */}
-        <Map />
+        <MapWithNoSSR />
+        {/* <Map /> */}
       </main>
     </>
   );
