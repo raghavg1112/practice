@@ -1,18 +1,12 @@
 import { Button, Grid } from "@nextui-org/react";
-
-export default function App({title,onButtonClick=()=>{}}) {
+import Link from "next/link";
+export default function App({ title, url }) {
   return (
-
-      <>
-        <Button onClick={onButtonClick} color="gradient" auto ghost>
-          {title}
-        </Button>
-      </>
-
+    <>
+      <Link href={url || "/Dashboard/auth/login"}>{title}</Link>
+    </>
   );
 }
-
-
 
 /*
   import React from 'react'

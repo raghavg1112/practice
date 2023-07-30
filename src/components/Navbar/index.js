@@ -1,7 +1,7 @@
-import { Navbar, Button, Link, Text, useTheme } from "@nextui-org/react";
+import { Navbar, Link, Text, useTheme } from "@nextui-org/react";
 import { Layout } from "./Layout.js";
 import { AcmeLogo } from "./AcmeLogo.js";
-import Login from "@/pages/login.js";
+import Button from "@/components/Button";
 export default function App() {
   const { isDark } = useTheme();
 
@@ -17,7 +17,7 @@ export default function App() {
 
         <Navbar.Content>
           <Navbar.Link color="inherit" href="#">
-            <Login />
+            <Button title="Sign in" url="/Dashboard/auth/login" />
           </Navbar.Link>
         </Navbar.Content>
       </Navbar>
