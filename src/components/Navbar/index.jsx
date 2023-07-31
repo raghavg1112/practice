@@ -10,11 +10,11 @@ export default function App() {
   const { isDark } = useTheme();
   const router = useRouter();
   const handleSignOut = async () => {
-    await signOut();
-    await router.push("/dashboard");
+    signOut();
+    router.push("/dashboard");
   };
   const handleSignIn = async () => {
-    await router.push("/dashboard/auth/login");
+    router.push("/dashboard/auth/login");
   };
   return (
     <Layout>

@@ -38,6 +38,12 @@ export default function index() {
     if (res.status === 201)
       router.push("/dashboard/auth/login/email_otp_verification");
   }
+
+  async function signInWithGoogle() {
+    await signIn("google");
+    router.push("/dashboard");
+  }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Welcome Back</h1>
@@ -60,9 +66,7 @@ export default function index() {
       />
       <Button title="Submit Details" onClick={handleSubmit} />
       <button
-        onClick={() => {
-          signIn("google");
-        }}
+        onClick={() => signInWithGoogle()}
         className={styles.button + " " + styles.google}
       >
         Login with Google
