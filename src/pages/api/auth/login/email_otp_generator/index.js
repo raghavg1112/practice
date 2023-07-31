@@ -20,10 +20,15 @@ export const POST = async (request) => {
 
   // Generate OTP
   const otp = generateOTP();
+  const hashedOtp = await bcrypt.hash(otp, 5);
+  const filter = { email: email };
+  const update = { otp: hashedOtp };
+  await connect();
+  User.findOneAndUpdate(filter, update);
 
   // Email options
   const mailOptions = {
-    from: "your-email@gmail.com",
+    from: "rg406738@gmail.com",
     to: email,
     subject: "OTP Verification",
     text: `Your OTP is: ${otp}`,

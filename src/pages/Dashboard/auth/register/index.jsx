@@ -28,7 +28,7 @@ const Register = () => {
         }),
       });
       res.status === 201 &&
-        router.push("/Dashboard/auth/login?success=Account has been created");
+        router.push("/dashboard/auth/login?success=Account has been created");
     } catch (err) {
       setError(err);
       console.log(err);
@@ -62,7 +62,7 @@ const Register = () => {
         {error && "Something went wrong!"}
       </form>
       <span className={styles.or}>- OR -</span>
-      <Link className={styles.link} href="/Dashboard/auth/login">
+      <Link className={styles.link} href="/dashboard/auth/login">
         Login with an existing account
       </Link>
     </div>

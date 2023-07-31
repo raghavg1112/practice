@@ -22,7 +22,7 @@ const Login = ({ url }) => {
   }
 
   if (session.status === "authenticated") {
-    router?.push("/Dashboard");
+    router?.push("/dashboard");
   }
 
   const handleSubmit = (e) => {
@@ -36,13 +36,17 @@ const Login = ({ url }) => {
     });
   };
   async function emailOtpGenerate() {
-    const res = await fetch("/api/auth/login/emailOtpgenerate", {
+    const res = await fetch("/api/auth/login/email_otp_generator", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: {
+        email: email,
+      },
     });
-    if (res.status === 201) router.push("/Dashboard/auth/login/verifyOtp");
+    if (res.status === 201)
+      router.push("/dashboard/auth/login/email_otp_verification");
   }
   return (
     <div className={styles.container}>
@@ -85,7 +89,7 @@ const Login = ({ url }) => {
         Login with Github
       </button>
       <span className={styles.or}>- OR -</span>
-      <Link className={styles.link} href="/Dashboard/auth/register">
+      <Link className={styles.link} href="/dashboard/auth/register">
         Create new account
       </Link>
     </div>

@@ -1,11 +1,12 @@
-import { Router } from "next/router";
+import { Router, useRouter } from "next/router";
 import React, { useRef } from "react";
 
 export default function index() {
   const otp_ref = useRef();
+  const router = useRouter();
   async function handleSubmit() {
     const otp = otp_ref.current;
-    const res = await fetch("/api/auth/login/emailOtpVerify", {
+    const res = await fetch("/api/auth/login/email_otp_verification", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -15,8 +16,8 @@ export default function index() {
       },
     });
     if (res.status == 201 && res.message == "authenticated")
-      Router.push("api//auth/login/changePass");
-    else Router.push("/Dashboard/auth/login");
+      router.push("api//auth/login/change_password");
+    else router.push("/dashboard/auth/login");
   }
   return (
     <>

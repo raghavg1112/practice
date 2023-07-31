@@ -1,9 +1,9 @@
 import { Button, Grid } from "@nextui-org/react";
 import Link from "next/link";
-export default function App({ title, url }) {
+export default function App({ title, onClick }) {
   return (
     <>
-      <Link href={url || "/Dashboard/auth/login"}>{title}</Link>
+      <Button onClick={onClick}>{title}</Button>
     </>
   );
 }

@@ -9,7 +9,7 @@ export const POST = async (request) => {
 
   const hashedPassword = await bcrypt.hash(password, 5);
   const filter = { email: email };
-  const update = { password: password };
+  const update = { password: hashedPassword };
   const result = await User.findOneAndUpdate(filter, update);
   if (!result) return res.status(201).json({ message: "failed" });
   return res.status(201).json({ message: "changed" });

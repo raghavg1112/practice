@@ -1,4 +1,4 @@
-import { Router } from "next/router";
+import { Router, useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 
 export default function App() {
@@ -6,6 +6,7 @@ export default function App() {
   const email = useRef();
   const confirm_p = useRef();
   const [error, setError] = useState(0);
+  const router = useRouter();
   async function handleClick() {
     const password = pass.current;
     const confirm_pass = confirm_p.current;
@@ -15,7 +16,7 @@ export default function App() {
     } else {
       setError(0);
     }
-    const res = await fetch("/api/auth/login/changePass", {
+    const res = await fetch("/api/auth/login/change_password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,8 +27,8 @@ export default function App() {
       },
     });
     if (res.status == 201 && res.data.message == "Changed")
-      Router.push("/Dashboard/auth/login");
-    else Router.push("?Dashboard/auth/login/changePass");
+      router.push("/Dashboard/auth/login");
+    else router.push("/dashboard/auth/login/change_password");
   }
   return (
     <>
