@@ -3,10 +3,17 @@ import { Layout } from "./Layout.js";
 import { AcmeLogo } from "./AcmeLogo.js";
 import Button from "@/components/Button";
 import { useRouter } from "next/router.js";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 export default function App() {
+  const session = useSession();
   const { isDark } = useTheme();
   const router = useRouter();
-  const handleClick = async () => {
+  const handleSignOut = async () => {
+    await signOut();
+    await router.push("/dashboard");
+  };
+  const handleSignIn = async () => {
     await router.push("/dashboard/auth/login");
   };
   return (
@@ -21,7 +28,11 @@ export default function App() {
 
         <Navbar.Content>
           <Navbar.Link color="inherit" href="#">
-            <Button title="Sign in" onClick={handleClick} />
+            {session.status == "authenticated" ? (
+              <Button title="Sign Out" onClick={handleSignOut} />
+            ) : (
+              <Button title="Sign in" onClick={handleSignIn} />
+            )}
           </Navbar.Link>
         </Navbar.Content>
       </Navbar>

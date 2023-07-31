@@ -1,7 +1,11 @@
 import Head from "next/head";
-
+import Button from "@/components/Button";
 import Dashboard from "@/pages/Dashboard";
+import Router from "next/router";
 export default function Index() {
+  const handleClick = async () => {
+    Router.push("/dashboard/auth/login");
+  };
   return (
     <>
       <Head>
@@ -11,6 +15,7 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <Button title="click and then check" onClick={handleClick} />
         <Dashboard />
       </main>
     </>

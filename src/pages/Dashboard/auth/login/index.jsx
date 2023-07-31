@@ -1,39 +1,29 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "./index.module.css";
-import { getProviders, signIn, useSession } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Button from "@/components/Button";
 
-const Login = ({ url }) => {
+export default function index() {
   const session = useSession();
   const router = useRouter();
-  const params = useSearchParams();
+
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
-  useEffect(() => {
-    setError(params.get("error"));
-    setSuccess(params.get("success"));
-  }, [params]);
-
-  if (session.status === "loading") {
-    return <p>Loading...</p>;
-  }
-
-  if (session.status === "authenticated") {
-    router?.push("/dashboard");
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const email = e.target[0].value;
-    const password = e.target[1].value;
-
-    signIn("credentials", {
+  const [input, setInput] = useState({ email: "", password: "" });
+  const handleChange = (e) => {
+    const newUser = { ...input };
+    newUser[e.target.name] = e.target.value;
+    setInput(newUser);
+  };
+  const handleSubmit = async () => {
+    const res = await signIn("credentials", {
       email,
       password,
     });
+    if (res) router.push("/dashboard");
   };
   async function emailOtpGenerate() {
     const res = await fetch("/api/auth/login/email_otp_generator", {
@@ -50,28 +40,25 @@ const Login = ({ url }) => {
   }
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{success ? success : "Welcome Back"}</h1>
+      <h1 className={styles.title}>Welcome Back</h1>
       <h2 className={styles.subtitle}>Please sign in to see the dashboard.</h2>
-
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <input
-          type="text"
-          placeholder="Email"
-          required
-          className={styles.input}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          required
-          className={styles.input}
-        />
-        <button className={styles.button}>Login</button>
-        <button className={styles.button} onClick={emailOtpGenerate}>
-          forgot password?
-        </button>
-        {error && error}
-      </form>
+      <input
+        type="email"
+        placeholder="email"
+        name="email"
+        onChange={(e) => {
+          handleChange;
+        }}
+      />
+      <input
+        type="password"
+        placeholder="password"
+        name="password"
+        onChange={(e) => {
+          handleChange;
+        }}
+      />
+      <Button title="Submit Details" onClick={handleSubmit} />
       <button
         onClick={() => {
           signIn("google");
@@ -94,6 +81,4 @@ const Login = ({ url }) => {
       </Link>
     </div>
   );
-};
-
-export default Login;
+}
